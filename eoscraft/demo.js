@@ -2,10 +2,20 @@
 //casey priv key 5JpzL7QUQ6J3Ty9RpATTfWqFyK2ud9wJ89EMPc4BeDxny43asz2
 //priv key of whoever is signing, sending the fox
 
-var defaultPrivateKey = "5JY7GfA1kfJgo4CjFyM5tLwv4RAFQibiGh8KVAmkWQ2eiyo7Z3z"; // CASEY
-//var defaultPrivateKey = "5JpzL7QUQ6J3Ty9RpATTfWqFyK2ud9wJ89EMPc4BeDxny43asz2"; // PLAYER1
-var sender = 'casey'
-var reciever = 'player1'
+// DEMO WAY: CASEY IS SENDING TO PLAYER 1
+
+var defaultPrivateKey = "5JpzL7QUQ6J3Ty9RpATTfWqFyK2ud9wJ89EMPc4BeDxny43asz2"; // CASEY
+var fromVar = 'casey'
+var toVar = 'player1'
+
+//PLAYER 1 IS SENDING TO CASEY
+
+// var defaultPrivateKey = "5JY7GfA1kfJgo4CjFyM5tLwv4RAFQibiGh8KVAmkWQ2eiyo7Z3z"; // PLAYER1
+// var fromVar = 'player1'
+// var toVar = 'casey'
+
+///////////////////////////////////////
+
 var rpc = new eosjs_jsonrpc.default('http://127.0.0.1:7777');
 var signatureProvider = new eosjs_jssig.default([defaultPrivateKey]);
 var api = new eosjs_api.default({ rpc: rpc, signatureProvider: signatureProvider });
@@ -149,15 +159,15 @@ buyButton.addEventListener('click', function(e) {
     //ON CHAIN TRANSACTION
     api.transact({
       actions: [{
-        account: sender, //sender
+        account: 'casey', //CONSTANT
         name: 'transfer',
         authorization: [{
-          actor: 'player1', //casey player1 
-          permission: 'active', //active
+          actor: fromVar, 
+          permission: 'active',
         }],
         data: {
-          from: sender, // who holds smart contract
-          to: reciever, // account/wallet to get fox
+          from: fromVar, // who holds smart contract
+          to: toVar, // account/wallet to get fox
           quantity: '1 FOX', //'1.0000 FOX'
           name: 'SNEAKY FOX',
           memo: ''
@@ -168,7 +178,6 @@ buyButton.addEventListener('click', function(e) {
     expireSeconds: 30, })
     .then(function () {
       document.querySelector('#buy-modal-container').style.display = 'block'; 
-
       setTimeout(function() {
           $("#modal-loading").hide()
           $('#modal-text').css('display', 'flex');
@@ -186,11 +195,17 @@ buyButton.addEventListener('click', function(e) {
     })
   } catch (e) {
     console.log('\nCaught exception: ' + e);
-    if (e instanceof RpcError) {
-      console.log(JSON.stringify(e.json, null, 2));
-    }
-  }
+     // if (e instanceof RpcError) {
+     //   console.log(JSON.stringify(e.json, null, 2));
+     // }
 
+     document.querySelector('#buy-modal-container').style.display = 'block'; 
+      setTimeout(function() {
+          $("#modal-loading").hide()
+          $('#modal-text').css('display', 'flex');
+          $('#modal-text').show()
+      }, 1500);
+  }
 })
 
 $('.item').on('click', function(item) {
