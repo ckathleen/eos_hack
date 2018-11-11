@@ -13,9 +13,15 @@
 </head>
 <body>
   <div id="left">
+    <div id='modal' class='modal'>
+      <div id='model-content' class='modal-content'>
+        <h4>BOUGHT AN ITEM ON THE EOS CHAIN </h4>
+      </div>
+    </div>
+
     <div id="blocker">
       <div id="instructions">
-        <span class="bigger">EOS CRAFT</span>
+        <span class="bigger">FOX CRAFT</span>
         <br>
         <span id="middleMessage" class="big">Loading... please wait</span>
         <br>
@@ -54,7 +60,7 @@
   </div>
   <div id="right">
     <ul class="list">
-      <li class="list-divider">BUY IN APP ITEMS</li>
+      <li class="list-divider"><span id='market'>MARKET</span> | BUY IN APP ITEMS</li>
       <li class="condensed">
         <form>
           <select name="action">
@@ -68,15 +74,15 @@
             <option value="deselect">Deselect region</option> -->
           </select>
           <div class='items' style='height:500px; overflow-y: scroll'>
-            <ul style="list-style-type:none">
+            <ul class='items-list' style="list-style-type:none">
               <li id='fox1'> FOXXY FOX 
-                <img src="/textures/fox1_gif.gif" style="width:130%">
+                <img id='fox1' src="/textures/fox1_gif.gif" style="width:130%">
               </li>
               <li> TIMMY FOX
-                  <img src="/textures/fox2_gif.gif" style="width:130%">
+                  <img id='fox2' src="/textures/fox2_gif.gif" style="width:130%">
               </li>
-              <li> MR. FOX 
-                  <img src="/textures/fox3_gif.gif" style="width:130%">
+              <li> GOLD FOX 
+                  <img id='fox3' src="/textures/fox3_gif.gif" style="width:130%">
               </li>
             </ul>
           </div>
@@ -86,9 +92,13 @@
     </ul>
     
     <div id="buyBtn" class="button">Buy</div>
-<!--     <a id="reset" href="#" class="button danger">Reset</a> -->
     <div id="images"></div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src='./lib/dist-web/eosjs-api-debug.js'></script>
+  <script src='./lib/dist-web/eosjs-jsonrpc-debug.js'></script>
+  <script src='./lib/dist-web/eosjs-rpcerror-debug.js'></script>
+  <script src='./lib/dist-web/eosjs-jssig-debug.js'></script>
   <script type="text/javascript" src="lib/LZWEncoder.js"></script>
   <script type="text/javascript" src="lib/NeuQuant.js"></script>
   <script type="text/javascript" src="lib/GIFEncoder.js"></script>

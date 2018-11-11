@@ -1,0 +1,2 @@
+//WORKING ISSUE COMMAND 
+cleos --print-response push action casey issue '{"to":"casey","quantity":"1 FOX","uris":["https://ipfs.io/ipfs/Qmf56KLfsRYWKcRShdYN5HzMqTSH9vYRdZkSW4AaiKagRL"],"name":"_FOX","memo":"fox"}' -p casey@active 

@@ -1,12 +1,29 @@
-// smart contact nft stuff
-const defaultPrivateKey = "5JKXY61vpDDCKKM2GSY5z59ZrXbE3m3bj1Qzzk3BGvaF4jaKbUt"; // user casey
-const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
 
+
+// const { Api, JsonRpc, RpcError, JsSignatureProvider } = require('eosjs');
+// const fetch = require('node-fetch');                            // node only; not needed in browsers
+// const { TextDecoder, TextEncoder } = require('text-encoding');  // node, IE11 and IE Edge Browsers
+
+// import { Api, JsonRpc, RpcError, JsSignatureProvider } from 'eosjs';
 
 // not working because of es5
-const { Api, JsonRpc, RpcError, JsSignatureProvider } = require('eosjs');
-const fetch = require('node-fetch');                            // node only; not needed in browsers
-const { TextDecoder, TextEncoder } = require('text-encoding');  // node, IE11 and IE Edge Browsers
+// var eosjs = require('eosjs');
+// var Api = eosjs.Api
+// var JsSignatureProvider = eosjs.JsSignatureProvider
+
+// const defaultPrivateKey = "5JKXY61vpDDCKKM2GSY5z59ZrXbE3m3bj1Qzzk3BGvaF4jaKbUt"; // user casey
+// const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
+
+// const fetch = require('node-fetch');                            // node only; not needed in browsers
+// const { TextDecoder, TextEncoder } = require('text-encoding');  // node, IE11 and IE Edge Browsers
+
+//player 1 priv key 5JY7GfA1kfJgo4CjFyM5tLwv4RAFQibiGh8KVAmkWQ2eiyo7Z3z
+//casey priv key 5JpzL7QUQ6J3Ty9RpATTfWqFyK2ud9wJ89EMPc4BeDxny43asz2
+//priv key of whoever is signing, sending the fox
+var defaultPrivateKey = "5JY7GfA1kfJgo4CjFyM5tLwv4RAFQibiGh8KVAmkWQ2eiyo7Z3z"; // priv key for casey
+var rpc = new eosjs_jsonrpc.default('http://127.0.0.1:7777');
+var signatureProvider = new eosjs_jssig.default([defaultPrivateKey]);
+var api = new eosjs_api.default({ rpc: rpc, signatureProvider: signatureProvider });
 
 
 var textures = "/textures/"
@@ -110,46 +127,52 @@ if (game.notCapable()) instructions.style.visibility = 'hidden'
 game.interact.on('attain', function() { instructions.style.visibility = 'hidden' })
 game.interact.on('release', function() { instructions.style.visibility = 'visible' })
 
-buyButton.addEventListener('click', function(e) {
-  //get selected item in list and buy that shit
-  [1,2].forEach((num) => {
-    console.log('num', num)
-  })
+$('.items').on('click', function () {
+  console.log($('#' + event.target.id).parent())
+  console.log('item clicked')
+//  debugger
 })
-  // console.log('BUYING ITEM ON CHAIN')
-  // try {
-  //   (async () => {
-  //     const result await api.transact({
-  //       actions: [{
-  //         account: 'casey',
-  //         name: 'transfer',
-  //         authorization: [{
-  //           actor: 'casey',
-  //           permission: 'active',
-  //         }],
-  //         data: {
-  //           from: 'casey', //who holds smart contract
-  //           to: 'casey', // account/wallet to get fox
-  //           quantity: '1 FOX',
-  //           uris:['https://ipfs.io/ipfs/Qmf56KLfsRYWKcRShdYN5HzMqTSH9vYRdZkSW4AaiKagRL'],
-  //           memo: '',
-  //         }
-  //       }]
-  //     }, {
-  //     blocksBehind: 3,
-  //     expireSeconds: 30,
-  //   });
-  //   console.dir(result);
-  //   })();
-  // } catch (e) {
-  //   console.log('\nCaught exception: ' + e);
-  //   if (e instanceof RpcError) {
-  //     console.log(JSON.stringify(e.json, null, 2);
-  //   }
-  // }
+
+buyButton.addEventListener('click', function(e) {
+  console.log('BUYING ITEM ON CHAIN')
+  try {
+    // Promise.resolve('foo') // remove when working
+    //ON CHAIN TRANSACTION
+    api.transact({
+      actions: [{
+        account: 'casey',
+        name: 'transfer',
+        authorization: [{
+          actor: 'player1', //casey 
+          permission: 'active', //active
+        }],
+        data: {
+          from: 'player1', // who holds smart contract
+          to: 'casey', // account/wallet to get fox
+          quantity: '1 FOX', //'1.0000 FOX'
+          name: 'SNEAKY FOX',
+          memo: ''
+        }
+      }]
+    }, {
+    blocksBehind: 3,
+    expireSeconds: 30, })
+    .then(function () {
+      //get_table_row
+      console.log('SUCCESS: BOUGHT ITEM ON THE CHAIN')
+      document.querySelector('#modal').style.display = 'block';    
+    })
+  } catch (e) {
+    console.log('\nCaught exception: ' + e);
+    if (e instanceof RpcError) {
+      console.log(JSON.stringify(e.json, null, 2));
+    }
+  }
+
+})
 
 
-document.querySelector('#fox1').on('click', function() {
+document.querySelector('#fox1').addEventListener('click', function() {
   console.log('see me')
 })
 
