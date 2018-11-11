@@ -12,16 +12,88 @@
   <link rel="stylesheet" href="style.css"></link>
 </head>
 <body>
+  <div class='market-wrapper'>
+    <div class='market' style='padding:20px'>
+     <div class='market-header'> 
+      <h1> Marketplace </h1>
+      <img id='x-market' src='/textures/x.png' width='30px'> 
+      </div> 
+      <div class='market-cat'> 
+        <h1>Character Skins</h1>
+        <div class='market-items'>
+          <div class='item'>
+              SNEAKY FOX 
+              <img id='fox1' src="/textures/fox1_gif.gif">
+            </div>
+            <div class='item'>
+              FANCY FOX
+              <img id='fox2' src="/textures/fox2_gif.gif">
+            </div>
+            <div class='item'>
+              GOLD FOX 
+              <img id='fox3' src="/textures/fox3_gif.gif">
+            </div>
+        </div>
+      </div>
+      <div class='market-cat'> 
+        <h1>Artifacts</h1>
+          <div class='market-items'>
+            <div class='item'>
+                EOS BOX 
+                <img id='art1' src="/textures/art1.jpg">
+              </div>
+              <div class='item'>
+                MYSTERY BOX
+                <img id='art2' src="/textures/art2.jpg">
+              </div>
+              <div class='item'>
+                SPECIAL BOX 
+                <img id='art3' src="/textures/art3.jpg">
+              </div>
+          </div>
+          <h1 style='color:transparent;'>s</h1>
+            <div class='market-items'>
+            <div class='item'>
+                EGG
+                <img id='art4' src="/textures/art4.jpg">
+              </div>
+              <div class='item'>
+                FISH
+                <img id='art5' src="/textures/art5.jpg">
+              </div>
+              <div class='item'>
+                DIAMOND 
+                <img id='art3' src="/textures/art6.jpg">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div id="left">
-    <div id='modal' class='modal'>
-      <div id='model-content' class='modal-content'>
-        <h4>BOUGHT AN ITEM ON THE EOS CHAIN </h4>
+    <div id='buy-modal-container''>
+      <div id='modal-content' class='modal-content'>
+        <div id='modal-header'>
+          <h4 style='font-size: 36px; padding-bottom: 10px;'>BOUGHT AN ITEM</h4>
+          <img id='x-buy-modal' src='/textures/x.png' width='30px'>
+        </div>
+        <div id='modal-loading' style='text-align:center; padding: 20px 0px;'>
+          <img src='/textures/loader.gif' width='30px'>
+        </div>
+        <div id='modal-text'>
+          Item: Fancy Fox
+          Price: 500 EOS
+          <img src='/textures/fox1_gif.gif'>
+          <!-- chart with eos chain shit -->
+        </div>
       </div>
     </div>
 
     <div id="blocker">
       <div id="instructions">
-        <span class="bigger">FOX CRAFT</span>
+        <span class="bigger">WILD ONES</span>
         <br>
         <span id="middleMessage" class="big">Loading... please wait</span>
         <br>
@@ -60,40 +132,38 @@
   </div>
   <div id="right">
     <ul class="list">
-      <li class="list-divider"><span id='market'>MARKET</span> | BUY IN APP ITEMS</li>
+      <li class="list-divider" style='font-size:16px;'>BUY IN APP ITEMS</li>
       <li class="condensed">
         <form>
           <select name="action">
-            <option value="walls" selected>Player Skin</option>
-            <option value="overlay">Grass</option>
-<!--             <option value="erase">Erase</option>
-            <option value="move">Move up</option>
-            <option value="replace">Replace</option>
-            <option value="fill">Fill air</option>
-            <option value="nothing">Only highlight</option>
-            <option value="deselect">Deselect region</option> -->
+            <option value="walls" selected>Character Skins</option>
+            <option value="overlay">Artifacts</option>
           </select>
-          <div class='items' style='height:500px; overflow-y: scroll'>
-            <ul class='items-list' style="list-style-type:none">
-              <li id='fox1'> FOXXY FOX 
-                <img id='fox1' src="/textures/fox1_gif.gif" style="width:130%">
-              </li>
-              <li> TIMMY FOX
-                  <img id='fox2' src="/textures/fox2_gif.gif" style="width:130%">
-              </li>
-              <li> GOLD FOX 
-                  <img id='fox3' src="/textures/fox3_gif.gif" style="width:130%">
-              </li>
-            </ul>
+          <div class='items side-bar' style='height:500px; overflow-y: scroll;'>
+              <div class='item'>
+                FANCY FOX
+                <img id='fox2' src="/textures/fox2_gif.gif" style="width:100%;">
+              </div>
+              <hr>
+              <div class='item'>
+                SNEAKY FOX 
+                <img id='fox1' src="/textures/fox1_gif.gif" style="width:100%;">
+              </div>
+              <hr>
+              <div class='item'>
+                GOLD FOX 
+                <img id='fox3' src="/textures/fox3_gif.gif" style="width:100%;">
+              </div>
           </div>
         </form>
       </li>
-<!--       <li class="list-divider">Frame Controls</li> -->
     </ul>
-    
-    <div id="buyBtn" class="button">Buy</div>
-    <div id="images"></div>
-  </div>
+    <div id="buyBtn" class="button"> Quick Buy</div>
+    <div id="marketPlace" class="button danger">Marketplace</a>
+  </div> 
+  <!-- end of right panel -->
+
+  <!-- </div> -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src='./lib/dist-web/eosjs-api-debug.js'></script>
   <script src='./lib/dist-web/eosjs-jsonrpc-debug.js'></script>

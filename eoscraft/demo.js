@@ -34,6 +34,7 @@ var message = document.querySelector('#middleMessage')
 var createSelect = require('voxel-select')
 var highlight = require('voxel-highlight')
 var transforms = require('voxel-transforms')
+var player = require('voxel-player')
 var fly = require('voxel-fly')
 var toolbar = require('toolbar')
 
@@ -47,7 +48,8 @@ var game = require('voxel-hello-world')({
     // 'whitewool'
   ],
   texturePath: textures,
-  playerSkin: textures + 'fox1_skin.png',
+  playerSkin: textures + 'fox1_skin.png', //fox1_skin.png
+  foxSkin: textures + 'fox1_skin.png',
   interactElement: instructions,
   container: document.querySelector('#left'),
   statsDisabled: true
@@ -129,38 +131,73 @@ game.interact.on('release', function() { instructions.style.visibility = 'visibl
 
 $('.items').on('click', function () {
   console.log($('#' + event.target.id).parent())
-  console.log('item clicked')
+  console.log('quick buy item clicked')
+
 //  debugger
 })
 
+//buy market items on click
+$('.market-items.items').on('click', function () {
+  console.log('item being bought')
+  document.querySelector('#buy-modal-container').style.display = 'block'; 
+})
+
+$('#marketPlace').on('click', function () {
+  console.log('showing marketplace')
+   $('.market-wrapper').show()
+})
+
+$('#x-buy-modal').on('click', function () {
+  console.log('hiding modal')
+  $('#buy-modal-container').hide()
+})
+
+$('#x-market').on('click', function () {
+  console.log('hiding wrapper')
+  $('.market-wrapper').hide()
+})
 buyButton.addEventListener('click', function(e) {
   console.log('BUYING ITEM ON CHAIN')
+  //buy item with selected class
   try {
-    // Promise.resolve('foo') // remove when working
+     Promise.resolve('foo') // remove when working
     //ON CHAIN TRANSACTION
-    api.transact({
-      actions: [{
-        account: 'casey',
-        name: 'transfer',
-        authorization: [{
-          actor: 'player1', //casey 
-          permission: 'active', //active
-        }],
-        data: {
-          from: 'player1', // who holds smart contract
-          to: 'casey', // account/wallet to get fox
-          quantity: '1 FOX', //'1.0000 FOX'
-          name: 'SNEAKY FOX',
-          memo: ''
-        }
-      }]
-    }, {
-    blocksBehind: 3,
-    expireSeconds: 30, })
+    // api.transact({
+    //   actions: [{
+    //     account: 'casey',
+    //     name: 'transfer',
+    //     authorization: [{
+    //       actor: 'player1', //casey 
+    //       permission: 'active', //active
+    //     }],
+    //     data: {
+    //       from: 'player1', // who holds smart contract
+    //       to: 'casey', // account/wallet to get fox
+    //       quantity: '1 FOX', //'1.0000 FOX'
+    //       name: 'SNEAKY FOX',
+    //       memo: ''
+    //     }
+    //   }]
+    // }, {
+    // blocksBehind: 3,
+    // expireSeconds: 30, })
     .then(function () {
+      document.querySelector('#buy-modal-container').style.display = 'block'; 
+
+      setTimeout(function() {
+          $("#modal-loading").hide()
+          $('#modal-text').css('display', 'flex');
+          $('#modal-text').show()
+      }, 1500);
+      // change avatar to fox
+      // var createPlayer = player(game)
+      // var avatar2 = createPlayer(textures + 'fox1_skin.png')
+      // avatar2.possess()
+      // avatar = avatar2
+
       //get_table_row
-      console.log('SUCCESS: BOUGHT ITEM ON THE CHAIN')
-      document.querySelector('#modal').style.display = 'block';    
+      console.log('BOUGHT ITEM')
+
     })
   } catch (e) {
     console.log('\nCaught exception: ' + e);
@@ -171,9 +208,9 @@ buyButton.addEventListener('click', function(e) {
 
 })
 
-
-document.querySelector('#fox1').addEventListener('click', function() {
-  console.log('see me')
+$('.item').on('click', function(item) {
+  $('.item').removeClass('selected')
+  $(this).addClass('selected')
 })
 
 

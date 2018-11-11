@@ -29,7 +29,8 @@
     "browserify": "~2.11.0",
     "eosjs": "^20.0.0-beta2",
     "jquery": "^3.3.1",
-    "voxel-hello-world": "~0.4.0"
+    "voxel-hello-world": "~0.4.0",
+    "voxel-player": "^0.1.0"
   },
   "dependencies": {
     "voxel-stop-motion": "0.0.0",

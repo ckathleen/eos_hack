@@ -10,7 +10,13 @@ html, body { font-family: Azuki, Helvetica, Open Sans, Arial, sans-serif; margin
 .big { position: relative; top: -31px; font-size: 30px; margin-bottom: 10px; }
 .emphasis { position: relative; top: -58px; font-size: 20px; margin-bottom: 10px; }
 #left { position: fixed; top: 0; left: 0; right: 20%; bottom: 0;}
-#right { overflow: auto; position: absolute; top: 0; bottom: 0; right: 0; width: 20%; background-color: #D7DCE0;  }
+#right { 
+  position: absolute; 
+  top: 0; bottom: 0; right: 0; 
+  width: 20%; 
+  min-width: 250px;
+  background-color: #D7DCE0;  
+}
 .errorMessage, .errorMessage a { font-size: 40px; margin: 20px; }
 #images img { width: 90%; padding: 0 5% 5% 5%; }
 .list li.condensed { padding: 10px 15px !important; }
@@ -26,9 +32,104 @@ html, body { font-family: Azuki, Helvetica, Open Sans, Arial, sans-serif; margin
   opacity: 0.5;
 }
 
+#market {
+  height: 100%;
+  width: 100%;
+  background: white;
+  position: fixed;
+  z-index: 1;
+}
+
+.list {
+  margin-bottom: 0px !important;
+}
+
+.item img {
+  width: 200px;
+}
+
+.market-items {
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px 0px;
+}
+
+.market-header {
+  font-size:30px;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.market-items .item {
+    background: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 20px;
+    flex-direction: column;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+
+.market-items .item:hover {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+#x-market {
+  border: 1px solid transparent;
+}
+
+#x-market:hover {
+  border: 1px solid black;
+}
+
+.market-wrapper {
+    display:none;
+    padding: 0px;
+    background: white;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 10; 
+    background: linear-gradient(339deg, rgba(111,164,81,1) 0%, rgba(245,245,245,1) 100%);
+    overflow: scroll;
+
+}
+
+#market {
+  width: 80%;
+  height: 80%;
+  background: white;
+/*    position: absolute;
+    left: -100px;
+    width: 100px;
+    height: 100px;
+    background: blue;
+    transition: 1s;*/
+}
+
+.market-wrapper:hover #market {
+    transition: 1s;
+    left: 0;
+}
+
+.market-cat {
+    padding: 20px 0px;
+}
+
+#modal-text {
+  font-size: 20px;
+  display:none;
+}
+
+
+
 
 /* The Modal (background) */
-.modal {
+#buy-modal-container {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -40,6 +141,12 @@ html, body { font-family: Azuki, Helvetica, Open Sans, Arial, sans-serif; margin
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
 }
 
 /* Modal Content */
@@ -184,21 +291,41 @@ html, body { font-family: Azuki, Helvetica, Open Sans, Arial, sans-serif; margin
   -webkit-backface-visibility: hidden;
 }
 
-.items-list li{
-  border: 1px solid transparent;
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+
+ .side-bar .item{
+  padding: 5px;
+  border: 5px solid transparent;
 } 
 
-.items-list li:hover{
-  border: 1px solid grey;
+
+ .side-bar .item.selected{
+  padding: 5px;
+  border: 5px solid grey;
+} 
+
+
+/*.item.selected {
+ border: 1px solid lightgrey;
+ font-weight: bold
+}
+*/
+ .side-bar .item:hover{
+  border: 5px solid lightgrey;
 }
 
-#market:hover {
-  color: blue;
+.item:hover {
+  font-weight: bold;
 }
+
 
 .button.danger {
-  background-color: #E74C2E; }
+  background-color: #1eafe7; }
   .button.danger:hover, .button.danger:focus {
-    background-color: #ec7063; }
+    background-color: #69d2fb; }
   .button.danger:active, .button.danger.active {
-    background-color: #dc2d1b; }
+    background-color: #69d2fb; }
