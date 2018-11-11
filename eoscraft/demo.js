@@ -1,3 +1,14 @@
+// smart contact nft stuff
+const defaultPrivateKey = "5JKXY61vpDDCKKM2GSY5z59ZrXbE3m3bj1Qzzk3BGvaF4jaKbUt"; // user casey
+const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
+
+
+// not working because of es5
+const { Api, JsonRpc, RpcError, JsSignatureProvider } = require('eosjs');
+const fetch = require('node-fetch');                            // node only; not needed in browsers
+const { TextDecoder, TextEncoder } = require('text-encoding');  // node, IE11 and IE Edge Browsers
+
+
 var textures = "/textures/"
 var instructions = document.querySelector('#blocker')
 var images = document.querySelector('#images')
@@ -101,8 +112,41 @@ game.interact.on('release', function() { instructions.style.visibility = 'visibl
 
 buyButton.addEventListener('click', function(e) {
   //get selected item in list and buy that shit
-  console.log('BUY ITEM ON CHAIN')
+  [1,2].forEach((num) => {
+    console.log('num', num)
+  })
 })
+  // console.log('BUYING ITEM ON CHAIN')
+  // try {
+  //   (async () => {
+  //     const result await api.transact({
+  //       actions: [{
+  //         account: 'casey',
+  //         name: 'transfer',
+  //         authorization: [{
+  //           actor: 'casey',
+  //           permission: 'active',
+  //         }],
+  //         data: {
+  //           from: 'casey', //who holds smart contract
+  //           to: 'casey', // account/wallet to get fox
+  //           quantity: '1 FOX',
+  //           uris:['https://ipfs.io/ipfs/Qmf56KLfsRYWKcRShdYN5HzMqTSH9vYRdZkSW4AaiKagRL'],
+  //           memo: '',
+  //         }
+  //       }]
+  //     }, {
+  //     blocksBehind: 3,
+  //     expireSeconds: 30,
+  //   });
+  //   console.dir(result);
+  //   })();
+  // } catch (e) {
+  //   console.log('\nCaught exception: ' + e);
+  //   if (e instanceof RpcError) {
+  //     console.log(JSON.stringify(e.json, null, 2);
+  //   }
+  // }
 
 
 document.querySelector('#fox1').on('click', function() {

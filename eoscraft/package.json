@@ -1,5 +1,5 @@
 {
-  "name": "gifblocks",
+  "name": "eoscraft",
   "version": "0.0.0",
   "scripts": {
     "start": "beefy demo.js:bundle.js",
@@ -9,9 +9,10 @@
   "author": "",
   "license": "BSD",
   "devDependencies": {
-    "voxel-hello-world": "~0.4.0",
+    "beefy": "0.0.11",
     "browserify": "~2.11.0",
-    "beefy": "0.0.11"
+    "eosjs": "^20.0.0-beta2",
+    "voxel-hello-world": "~0.4.0"
   },
   "dependencies": {
     "voxel-stop-motion": "0.0.0",
