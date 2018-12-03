@@ -16,6 +16,3 @@ git clone git@github.com:ckathleen/eos_hack.git && cd foxcraft
 npm install
 npm start
 ```
-
-## Author
-Casey Caruso
