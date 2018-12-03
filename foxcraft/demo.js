@@ -43,8 +43,7 @@ var game = require('voxel-hello-world')({
     // 'whitewool'
   ],
   texturePath: textures,
-  playerSkin: textures + 'fox1_skin.png', //fox1_skin.png
-  foxSkin: textures + 'fox1_skin.png',
+  playerSkin: textures + 'fox1_skin.png',
   interactElement: instructions,
   container: document.querySelector('#left'),
   statsDisabled: true
